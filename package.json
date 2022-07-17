@@ -1,0 +1,26 @@
+{
+  "name": "matheus-teles-xp-challenge",
+  "version": "1.0.0",
+  "description": "Repositório de Matheus Teles Ferreira com o Desafio Técnico da XP",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheus-teles-git/matheus-teles-xp-challenge.git"
+  },
+  "author": "matheus-teles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheus-teles-git/matheus-teles-xp-challenge/issues"
+  },
+  "homepage": "https://github.com/matheus-teles-git/matheus-teles-xp-challenge#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "lint": "^0.7.0",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
