@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "test"
+    "test": "test",
+    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create"
   },
   "repository": {
     "type": "git",
