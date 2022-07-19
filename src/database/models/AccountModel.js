@@ -10,22 +10,10 @@ const UserModel_1 = __importDefault(require("./UserModel"));
 class Accounts extends sequelize_1.Model {
 }
 Accounts.init({
-    // userId: {
-    //   type: INTEGER,
-    //   allowNull: false,
-    // },
-    // assetId: {
-    //   type: INTEGER,
-    //   allowNull: false,
-    // },
     assetQuantity: {
         type: sequelize_1.INTEGER,
         allowNull: false,
     },
-    // assetValue: {
-    //   type: DECIMAL(10,2),
-    //   allowNull: false,
-    // },
     createdAt: {
         type: sequelize_1.DATE,
         allowNull: false,
@@ -40,6 +28,4 @@ Accounts.init({
 });
 Accounts.belongsToMany(UserModel_1.default, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
 Accounts.belongsToMany(AssetModel_1.default, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
-Accounts.belongsToMany(Accounts, { through: Accounts, foreignKey: 'assetValue', otherKey: 'value' });
-Accounts.belongsToMany(AssetModel_1.default, { through: Accounts, foreignKey: 'value', otherKey: 'assetValue' });
 exports.default = Accounts;

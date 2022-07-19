@@ -26,15 +26,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      assetValue: {
-        allowNull: false,
-        type: Sequelize.DECIMAL,
-        field: 'assetValue',
-        references: {
-          model: 'Assets',
-          key: 'value'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

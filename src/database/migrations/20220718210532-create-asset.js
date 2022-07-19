@@ -13,11 +13,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       value: {
-        unique: true,
         allowNull: false,
-        primaryKey: true,
-        type: Sequelize.DECIMAL,
-        field: 'value'
+        type: Sequelize.DECIMAL(10, 2),
       },
       quantity: {
         type: Sequelize.INTEGER
