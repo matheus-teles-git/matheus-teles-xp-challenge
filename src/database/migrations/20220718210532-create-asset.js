@@ -6,13 +6,18 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        field: 'id'
       },
       ticker: {
         type: Sequelize.STRING
       },
       value: {
-        type: Sequelize.DECIMAL
+        unique: true,
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.DECIMAL,
+        field: 'value'
       },
       quantity: {
         type: Sequelize.INTEGER
