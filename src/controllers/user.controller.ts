@@ -4,7 +4,7 @@ import UserService from '../services/user.service'
 class UserController {
   constructor(private userService = new UserService()) {}
 
-  public async retrieveBalance (request: Request, response: Response) {
+  public retrieveBalance = async (request: Request, response: Response) => {
     const { id } = request.params;
     const balance = await this.userService.retrieveBalance(Number(id));
     return response.status(200).json(balance);

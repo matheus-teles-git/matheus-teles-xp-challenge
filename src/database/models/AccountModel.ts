@@ -27,7 +27,7 @@ Accounts.init({
 
 }, {
   sequelize: database,
-  modelName: 'accounts'
+  modelName: 'Accounts'
 });
 
 Accounts.belongsToMany(Users, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });

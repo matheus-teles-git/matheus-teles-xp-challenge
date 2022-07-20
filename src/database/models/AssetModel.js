@@ -36,6 +36,6 @@ Assets.init({
     },
 }, {
     sequelize: _1.default,
-    modelName: 'assets'
+    modelName: 'Assets'
 });
 exports.default = Assets;
