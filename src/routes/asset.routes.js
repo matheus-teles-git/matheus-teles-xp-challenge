@@ -8,4 +8,5 @@ const asset_controller_1 = __importDefault(require("../controllers/asset.control
 const asset = new asset_controller_1.default();
 const router = (0, express_1.Router)();
 router.get('/:id', asset.getByClient);
+router.get('/assetinfo/:id', asset.getByAsset);
 exports.default = router;

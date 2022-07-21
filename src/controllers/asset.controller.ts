@@ -10,6 +10,12 @@ class AssetController {
     return response.status(200).json(clientAssets);
   }
 
+  public getByAsset = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    const assetInfo = await this.assetService.getByAsset(Number(id));
+    return response.status(200).json(assetInfo);
+  }
+
 }
 
 export default AssetController;

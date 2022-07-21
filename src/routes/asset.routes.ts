@@ -8,4 +8,6 @@ const router = Router();
 
 router.get('/:id', asset.getByClient);
 
+router.get('/assetinfo/:id', asset.getByAsset)
+
 export default router;

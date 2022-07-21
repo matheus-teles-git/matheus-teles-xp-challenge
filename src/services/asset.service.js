@@ -13,11 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AccountModel_1 = __importDefault(require("../database/models/AccountModel"));
+const AssetModel_1 = __importDefault(require("../database/models/AssetModel"));
 class AssetService {
     getByClient(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const clientAssets = yield AccountModel_1.default.findAll({ attributes: ['userId', 'assetId', 'assetQuantity', 'assetValue'], where: { userId: id } });
             return clientAssets;
+        });
+    }
+    getByAsset(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const asset = yield AssetModel_1.default.findOne({ where: { id } });
+            return { id: asset === null || asset === void 0 ? void 0 : asset.id, codAtivo: asset === null || asset === void 0 ? void 0 : asset.ticker, quantidade: asset === null || asset === void 0 ? void 0 : asset.quantity, valor: asset === null || asset === void 0 ? void 0 : asset.value };
         });
     }
 }

@@ -21,6 +21,11 @@ class AssetController {
             const clientAssets = yield this.assetService.getByClient(Number(id));
             return response.status(200).json(clientAssets);
         });
+        this.getByAsset = (request, response) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = request.params;
+            const assetInfo = yield this.assetService.getByAsset(Number(id));
+            return response.status(200).json(assetInfo);
+        });
     }
 }
 exports.default = AssetController;
