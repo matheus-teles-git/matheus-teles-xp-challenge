@@ -18,6 +18,19 @@ class UserController {
     const deposit = await this.userService.deposit(payload);
     return response.status(200).json({ message: `Account balance of client #${deposit?.clientCode} is R$${deposit?.balance}` });
   }
+
+  public withdraw = async (request: Request, response: Response) => {
+    const payload = request.body;
+    if (payload.balance <= 0) {
+      return response.status(422).json({ message: 'Withdraw value must be higher than zero' });
+    }
+    const deposit = await this.userService.withdraw(payload);
+    if (deposit === null) {
+      return response.status(422).json({ message: 'Not enough balance to complete that operation' });
+    }
+    return response.status(200).json({ message: `Account balance of client #${deposit?.clientCode} is R$${deposit?.balance}` });
+  }
+
 }
 
 export default UserController;

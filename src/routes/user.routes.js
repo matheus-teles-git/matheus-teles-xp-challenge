@@ -9,4 +9,5 @@ const user = new user_controller_1.default();
 const router = (0, express_1.Router)();
 router.get('/:id', user.retrieveBalance);
 router.post('/deposito', user.deposit);
+router.post('/saque', user.withdraw);
 exports.default = router;

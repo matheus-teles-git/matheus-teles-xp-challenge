@@ -8,6 +8,8 @@ const router = Router();
 
 router.get('/:id', user.retrieveBalance);
 
-router.post('/deposito', user.deposit)
+router.post('/deposito', user.deposit);
+
+router.post('/saque', user.withdraw);
 
 export default router;
