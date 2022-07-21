@@ -23,6 +23,9 @@ class UserController {
         });
         this.deposit = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const payload = request.body;
+            if (payload.balance <= 0) {
+                return response.status(422).json({ message: 'Deposit value must be higher than zero' });
+            }
             const deposit = yield this.userService.deposit(payload);
             return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
         });
