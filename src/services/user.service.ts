@@ -26,7 +26,7 @@ class UserService {
       const x  = current.balance;
       const y = payload.balance
       const newBalance = evaluate(`${x} - ${y}`);
-      if (newBalance <= 0) return null;
+      if (newBalance < 0) return null;
       await Users.update( { balance: newBalance.toFixed(2) }, { where: { id: payload.clientCode }});
       return { clientCode: payload.clientCode, balance: newBalance.toFixed(2) } as IUserRequest;
     }
