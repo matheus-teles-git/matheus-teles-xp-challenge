@@ -26,6 +26,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      assetValue: {
+        defaultValue: 0,
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
