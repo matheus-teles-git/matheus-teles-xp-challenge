@@ -13,18 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AccountModel_1 = __importDefault(require("../database/models/AccountModel"));
-const AssetModel_1 = __importDefault(require("../database/models/AssetModel"));
 class AssetService {
     getByClient(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const clientAssets = yield AccountModel_1.default.findAll({ where: { id } });
-            const assets = [];
-            clientAssets.forEach((entry) => __awaiter(this, void 0, void 0, function* () {
-                const x = yield AssetModel_1.default.findOne({ where: { id: entry.assetId } });
-                const e = { codCliente: entry.userId, codAtivo: entry.assetId, qtdeAtivo: entry.assetQuantity, valor: x === null || x === void 0 ? void 0 : x.value };
-                assets.push(e);
-            }));
-            return assets;
+            const clientAssets = yield AccountModel_1.default.findAll({ attributes: ['userId', 'assetId', 'assetQuantity', 'assetValue'], where: { userId: id } });
+            return clientAssets;
         });
     }
 }

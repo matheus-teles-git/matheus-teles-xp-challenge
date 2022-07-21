@@ -35,7 +35,10 @@ Accounts.init({
   modelName: 'Accounts'
 });
 
-Accounts.belongsToMany(Users, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
-Accounts.belongsToMany(Assets, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
+Accounts.belongsTo(Users, { foreignKey: 'userId' });
+Accounts.belongsTo(Assets, { foreignKey: 'assetId' });
+
+Users.hasMany(Accounts, { foreignKey: 'userId' });
+Assets.hasMany(Accounts, { foreignKey: 'assetId' });
 
 export default Accounts;
