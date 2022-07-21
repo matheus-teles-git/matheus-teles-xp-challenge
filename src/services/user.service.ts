@@ -1,7 +1,7 @@
 import Users from "../database/models/UserModel"
 import IUserRequest from "../interfaces/userRequest.interface";
-
-
+import { evaluate } from 'mathjs';
+//found this math library searching on google
 
 class UserService {
   public async retrieveBalance(id: number) {
@@ -12,9 +12,11 @@ class UserService {
   public async deposit(payload: IUserRequest) {
     const current = await Users.findOne( { where: { id: payload.clientCode } });
     if (current?.balance != undefined) {
-      const newBalance = current?.balance + payload.balance;
-      await Users.update( { balance: newBalance }, { where: { id: payload.clientCode }});
-      return { clientCode: payload.clientCode, balance: newBalance } as IUserRequest;
+      const x  = current.balance;
+      const y = payload.balance
+      const newBalance = evaluate(`${x} + ${y}`);
+      await Users.update( { balance: newBalance.toFixed(2) }, { where: { id: payload.clientCode }});
+      return { clientCode: payload.clientCode, balance: newBalance.toFixed(2) } as IUserRequest;
     }
   }
 }

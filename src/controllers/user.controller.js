@@ -21,6 +21,11 @@ class UserController {
             const balance = yield this.userService.retrieveBalance(Number(id));
             return response.status(200).json(balance);
         });
+        this.deposit = (request, response) => __awaiter(this, void 0, void 0, function* () {
+            const payload = request.body;
+            const deposit = yield this.userService.deposit(payload);
+            return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
+        });
     }
 }
 exports.default = UserController;
