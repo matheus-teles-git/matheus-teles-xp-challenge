@@ -41,7 +41,8 @@ class UserService {
                 const x = current.balance;
                 const y = payload.balance;
                 const newBalance = (0, mathjs_1.evaluate)(`${x} - ${y}`);
-                if (newBalance < 0)
+                console.log(newBalance);
+                if (newBalance <= 0)
                     return null;
                 yield UserModel_1.default.update({ balance: newBalance.toFixed(2) }, { where: { id: payload.clientCode } });
                 return { clientCode: payload.clientCode, balance: newBalance.toFixed(2) };

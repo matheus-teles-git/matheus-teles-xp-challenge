@@ -6,7 +6,6 @@ import Users from "./UserModel";
 class Accounts extends Model {
   userId!: ForeignKey<number>
   assetId!:  ForeignKey<number>;
-  assetValue!: number;
   assetQuantity!: number;
   createdAt!: Date;
   updatedAt!: Date;
@@ -19,10 +18,6 @@ Accounts.init({
   },
   createdAt: {
     type: DATE,
-    allowNull: false,
-  },
-  assetValue: {
-    type: INTEGER,
     allowNull: false,
   },
   updatedAt: {
