@@ -29,7 +29,7 @@ module.exports = {
       assetValue: {
         defaultValue: 0,
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
       },
       createdAt: {
         allowNull: false,
