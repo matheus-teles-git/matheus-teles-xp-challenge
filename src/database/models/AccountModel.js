@@ -14,10 +14,6 @@ Accounts.init({
         type: sequelize_1.INTEGER,
         allowNull: false,
     },
-    assetValue: {
-        type: (0, sequelize_1.DECIMAL)(10, 2),
-        allowNull: false,
-    },
     createdAt: {
         type: sequelize_1.DATE,
         allowNull: false,
