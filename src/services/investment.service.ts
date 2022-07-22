@@ -23,14 +23,15 @@ class InvestmentService {
     }
     const newAccountBalance = evaluate(`${retrieveAccountBalance?.balance} - ${operation}`);
     await Users.update({ balance: newAccountBalance}, { where: { id: payload.codCliente } });
-    const checkCustody = await Accounts.findOne({ where: { userId: payload.codCliente, assetId: payload.codAtivo } });
+    const checkCustody = await Accounts.findOne( { attributes: ['assetQuantity', 'userId', 'assetId', ], where: { userId: payload.codCliente, assetId: payload.codAtivo } });
     if (checkCustody === null) {
       const newCustody = await Accounts.create({ userId: payload.codCliente, assetId: payload.codAtivo, assetQuantity: payload.qtdeAtivo, assetValue: retrieveAsset?.value });
       return newCustody;
     }
-    const newAssetQuantity = evaluate(`${retrieveAsset?.quantity} + ${payload.qtdeAtivo}`)
-    await Accounts.update({assetQuantity: newAssetQuantity }, { where: {userId: payload.codCliente, assetId: payload.codAtivo } });
-    return { userId: payload.codCliente, assetId: payload.codAtivo, assetQuantity: newAssetQuantity, assetvalue: retrieveAsset?.value };
+    // const newAssetQuantity = evaluate(`${retrieveAsset?.quantity} - ${payload.qtdeAtivo}`);
+    await Accounts.update({assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.qtdeAtivo}`) }, { where: {userId: payload.codCliente, assetId: payload.codAtivo } });
+    await Assets.update( { quantity: evaluate(`${retrieveAsset?.quantity} - ${payload.qtdeAtivo}`)}, { where: { id: payload.codAtivo }});
+    return { userId: payload.codCliente, assetId: payload.codAtivo, assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.qtdeAtivo}`), assetvalue: retrieveAsset?.value };
   }
 
 }
