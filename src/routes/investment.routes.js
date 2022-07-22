@@ -8,4 +8,5 @@ const invesment_controller_1 = __importDefault(require("../controllers/invesment
 const invesment = new invesment_controller_1.default();
 const router = (0, express_1.Router)();
 router.post('/comprar', invesment.buyAsset);
+router.post('/vender', invesment.sellAsset);
 exports.default = router;

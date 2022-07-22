@@ -27,6 +27,14 @@ class InvestmentController {
             }
             return response.status(200).json(buy);
         });
+        this.sellAsset = (request, response) => __awaiter(this, void 0, void 0, function* () {
+            const payload = request.body;
+            const sell = yield this.investmentService.sellAsset(payload);
+            if (sell === null) {
+                return response.status(422).json({ message: 'Not enough assets on your account to sell' });
+            }
+            return response.status(200).json(sell);
+        });
     }
 }
 exports.default = InvestmentController;
