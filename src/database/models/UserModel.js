@@ -28,6 +28,6 @@ Users.init({
     },
 }, {
     sequelize: _1.default,
-    modelName: 'users',
+    modelName: 'Users',
 });
 exports.default = Users;

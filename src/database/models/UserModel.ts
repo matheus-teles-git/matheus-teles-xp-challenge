@@ -1,6 +1,7 @@
 import { INTEGER, DATE, DECIMAL, Model } from "sequelize";
 import database from '.';
 
+
 class Users extends Model {
   id!: number;
   balance!: number;
@@ -29,8 +30,8 @@ Users.init({
   },
 }, {
   sequelize: database,
-  modelName: 'users',
+  modelName: 'Users',
 });
 
-
 export default Users;
+

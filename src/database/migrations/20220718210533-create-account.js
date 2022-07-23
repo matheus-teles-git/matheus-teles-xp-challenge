@@ -26,6 +26,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      assetValue: {
+        foreignKey: true,
+        defaultValue: 0,
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

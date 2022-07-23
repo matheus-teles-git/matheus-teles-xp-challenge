@@ -39,7 +39,7 @@ Assets.init({
   },
 }, {
   sequelize: database,
-  modelName: 'assets'
+  modelName: 'Assets'
 });
 
 export default Assets;

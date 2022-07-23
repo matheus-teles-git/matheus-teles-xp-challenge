@@ -24,8 +24,12 @@ Accounts.init({
     },
 }, {
     sequelize: _1.default,
-    modelName: 'accounts'
+    modelName: 'Accounts'
 });
-Accounts.belongsToMany(UserModel_1.default, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
-Accounts.belongsToMany(AssetModel_1.default, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
+// Accounts.belongsTo(Users, { foreignKey: 'userId' });
+// Accounts.belongsTo(Assets, { foreignKey: 'assetId' });
+// Users.hasMany(Accounts, { foreignKey: 'userId' });
+// Assets.hasMany(Accounts, { foreignKey: 'assetId' });
+UserModel_1.default.belongsToMany(AssetModel_1.default, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
+AssetModel_1.default.belongsToMany(UserModel_1.default, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
 exports.default = Accounts;

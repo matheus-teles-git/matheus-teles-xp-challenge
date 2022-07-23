@@ -7,6 +7,7 @@ class Accounts extends Model {
   userId!: ForeignKey<number>
   assetId!:  ForeignKey<number>;
   assetQuantity!: number;
+  assetValue!: ForeignKey<number>;
   createdAt!: Date;
   updatedAt!: Date;
 }
@@ -27,10 +28,16 @@ Accounts.init({
 
 }, {
   sequelize: database,
-  modelName: 'accounts'
+  modelName: 'Accounts'
 });
 
-Accounts.belongsToMany(Users, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
-Accounts.belongsToMany(Assets, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
+// Accounts.belongsTo(Users, { foreignKey: 'userId' });
+// Accounts.belongsTo(Assets, { foreignKey: 'assetId' });
+
+// Users.hasMany(Accounts, { foreignKey: 'userId' });
+// Assets.hasMany(Accounts, { foreignKey: 'assetId' });
+
+Users.belongsToMany(Assets, { through: Accounts, foreignKey: 'assetId', otherKey: 'userId' });
+Assets.belongsToMany(Users, { through: Accounts, foreignKey: 'userId', otherKey: 'assetId' });
 
 export default Accounts;
