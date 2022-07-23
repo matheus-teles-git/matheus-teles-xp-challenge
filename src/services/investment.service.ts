@@ -81,7 +81,7 @@ class InvestmentService {
       );
     return { userId: payload.codCliente,
       assetId: payload.codAtivo, 
-      assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.qtdeAtivo}`), 
+      assetQuantity: evaluate(`${checkCustody?.assetQuantity} - ${payload.qtdeAtivo}`), 
       assetvalue: retrieveAsset?.assetValue };
   }
 

@@ -87,7 +87,7 @@ class InvestmentService {
             yield AssetModel_1.default.update({ quantity: (0, mathjs_1.evaluate)(`${retrieveAssetBalance === null || retrieveAssetBalance === void 0 ? void 0 : retrieveAssetBalance.quantity} + ${payload.qtdeAtivo}`) }, { where: { id: payload.codAtivo } });
             return { userId: payload.codCliente,
                 assetId: payload.codAtivo,
-                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} + ${payload.qtdeAtivo}`),
+                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} - ${payload.qtdeAtivo}`),
                 assetvalue: retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetValue };
         });
     }
