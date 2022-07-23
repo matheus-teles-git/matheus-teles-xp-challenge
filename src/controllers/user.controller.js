@@ -19,23 +19,26 @@ class UserController {
         this.retrieveBalance = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             const balance = yield this.userService.retrieveBalance(Number(id));
+            if (balance === null) {
+                return response.status(404).json({ message: 'Client not found' });
+            }
             return response.status(200).json(balance);
         });
         this.deposit = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const payload = request.body;
-            if (payload.balance <= 0) {
-                return response.status(422).json({ message: 'Deposit value must be higher than zero' });
-            }
             const deposit = yield this.userService.deposit(payload);
+            if (deposit === null) {
+                return response.status(404).json({ message: 'Client not found' });
+            }
             return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
         });
         this.withdraw = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const payload = request.body;
-            if (payload.balance <= 0) {
-                return response.status(422).json({ message: 'Withdraw value must be higher than zero' });
-            }
             const deposit = yield this.userService.withdraw(payload);
             if (deposit === null) {
+                return response.status(404).json({ message: 'Client not found' });
+            }
+            if (deposit === false) {
                 return response.status(422).json({ message: 'Not enough balance to complete that operation' });
             }
             return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });

@@ -19,12 +19,16 @@ class UserService {
     retrieveBalance(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const entry = yield UserModel_1.default.findOne({ where: { id } });
+            if (entry === null)
+                return null;
             return { clientCode: entry === null || entry === void 0 ? void 0 : entry.id, balance: entry === null || entry === void 0 ? void 0 : entry.balance };
         });
     }
     deposit(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             const current = yield UserModel_1.default.findOne({ where: { id: payload.clientCode } });
+            if (current === null)
+                return null;
             if ((current === null || current === void 0 ? void 0 : current.balance) != undefined) {
                 const x = current.balance;
                 const y = payload.balance;
@@ -37,12 +41,14 @@ class UserService {
     withdraw(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             const current = yield UserModel_1.default.findOne({ where: { id: payload.clientCode } });
+            if (current === null)
+                return null;
             if ((current === null || current === void 0 ? void 0 : current.balance) != undefined) {
                 const x = current.balance;
                 const y = payload.balance;
                 const newBalance = (0, mathjs_1.evaluate)(`${x} - ${y}`);
                 if (newBalance < 0)
-                    return null;
+                    return false;
                 yield UserModel_1.default.update({ balance: newBalance.toFixed(2) }, { where: { id: payload.clientCode } });
                 return { clientCode: payload.clientCode, balance: newBalance.toFixed(2) };
             }
