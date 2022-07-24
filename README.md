@@ -42,6 +42,10 @@
 
 ### Desenvolvido Usando
 
+* [![image](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+* [![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+* [![image](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+
 * Node.js
 * Typescript
 * Sequelize
@@ -130,6 +134,12 @@ Matheus Teles - https://www.linkedin.com/in/matheus-teles-/
 Project Link: [https://github.com/matheus-teles-git/matheus-teles-xp-challenge](https://github.com/matheus-teles-git/matheus-teles-xp-challenge)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 
 
 
