@@ -7,6 +7,6 @@ const asset = new AssetController();
 
 const router = Router();
 
-router.get('/all', verifyToken, asset.getAllAssets);
+router.get('/', verifyToken, asset.getAllAssets);
 
 export default router;
