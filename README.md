@@ -1,5 +1,5 @@
 
-<h3 align="center">Desafio Técnico da XP</h3>
+<h3 align="center">Desafio Técnico da XP - Back-End</h3>
 
   <p align="center">
     Repositório com a resolução de Matheus Teles Ferreira do desafio de back-end do processo seletivo da XP.
