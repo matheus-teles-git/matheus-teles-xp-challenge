@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import generateToken from '../authentication/generate.token';
 import AuthenticationService from '../services/authentication.service';
 
 class AuthenticationController {
@@ -10,6 +11,7 @@ class AuthenticationController {
     if (login === null) {
       return response.status(403).json({ message: 'Incorrect Email or Password' });
     }
+    const token = generateToken(payload);
     return response.status(200).json({ token });
   }
 
