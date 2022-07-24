@@ -40,11 +40,11 @@
 
 
 
-### Built With
+### Desenvolvido Usando
 
-* [https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white]
-* [![Typescript][Typescript]][https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white]
-* [![Sequelize][Sequelize]][https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white]
+* Node.js
+* Typescript
+* Sequelize
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
