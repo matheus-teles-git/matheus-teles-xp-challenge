@@ -1,23 +1,3 @@
-# matheus-teles-xp-challenge
-Repositório de Matheus Teles Ferreira com o Desafio Técnico da XP 
-
-
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/matheus-teles-git/matheus-teles-xp-challenge">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
 <h3 align="center">Desafio Técnico da XP</h3>
 
@@ -61,7 +41,7 @@ Repositório de Matheus Teles Ferreira com o Desafio Técnico da XP
 
 ### Built With
 
-* [![Node][Node.js]][https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white]
+* [https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white]
 * [![Typescript][Typescript]][https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white]
 * [![Sequelize][Sequelize]][https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white]
 <p align="right">(<a href="#top">back to top</a>)</p>
