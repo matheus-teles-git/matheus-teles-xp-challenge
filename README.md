@@ -3,19 +3,8 @@
 
   <p align="center">
     Repositório com a resolução de Matheus Teles Ferreira do desafio de back-end do processo seletivo da XP.
-    <br />
-    <a href="https://github.com/matheus-teles-git/matheus-teles-xp-challenge"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/matheus-teles-git/matheus-teles-xp-challenge">View Demo</a>
-    ·
-    <a href="https://github.com/matheus-teles-git/matheus-teles-xp-challenge">Report Bug</a>
-    ·
-    <a href="https://github.com/matheus-teles-git/matheus-teles-xp-challenge">Request Feature</a>
-  </p>
-</div>
-
-
+    
+  
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Conteúdo</summary>
@@ -45,6 +34,15 @@
 ![image](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![image](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+## Tomadas de decisão
+
+Optei por utilizar Typescript, ao invés do JavaScript puro, por oferecer maior confiabilidade em relação a tipagem das variávieis. O JS é dinamicamente tipado, e assim problemas por tipagem apenas são detectados no runtime, o que pode atrasar a produção de uma aplicação. Manipulação de dados fortemente tipados, que é o caso de uma aplicação financeira, necessitam de uma linguagem fortemente tipada.
+
+Utilizei Sequelize como uma ORM para facilitar as requisições ao banco de dados. O uso de uma ORM diminui a chance de erros em queries e no fluxo de dados para a aplicação.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -85,18 +83,6 @@
    
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ROADMAP -->
