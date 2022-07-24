@@ -4,9 +4,9 @@
   "description": "Repositório de Matheus Teles Ferreira com o Desafio Técnico da XP",
   "main": "src/index.js",
   "scripts": {
-    "start": "npx -y tsc && ts-node src/index.ts",
+    "start": "ts-node src/index.ts",
     "test": "test",
-    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
