@@ -19,6 +19,11 @@ class AssetController {
     return response.status(200).json(assetInfo);
   }
 
+  public getAllAssets = async (_request: Request, response: Response) => {
+    const assets = await this.assetService.getAllAssets();
+    return response.status(200).json(assets);
+  }
+
 }
 
 export default AssetController;

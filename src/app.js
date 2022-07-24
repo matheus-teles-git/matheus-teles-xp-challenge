@@ -11,4 +11,5 @@ app.use('/conta', routes_1.user);
 app.use('/ativos', routes_1.asset);
 app.use('/investimentos', routes_1.investment);
 app.use('/', routes_1.authentication);
+app.use('/allassets', routes_1.all);
 exports.default = app;

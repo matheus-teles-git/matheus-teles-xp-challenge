@@ -20,6 +20,11 @@ class AssetService {
     return { id: asset?.id, ticker: asset?.ticker, quantity: asset?.quantity, value: asset?.value };
   }
 
+  public async getAllAssets() {
+    const assets = await Assets.findAll({ raw: true, attributes: ['ticker', 'value', 'quantity'] });
+    return assets
+  }
+
 }
 
 export default AssetService;

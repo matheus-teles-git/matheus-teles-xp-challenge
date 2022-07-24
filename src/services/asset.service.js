@@ -29,5 +29,11 @@ class AssetService {
             return { id: asset === null || asset === void 0 ? void 0 : asset.id, ticker: asset === null || asset === void 0 ? void 0 : asset.ticker, quantity: asset === null || asset === void 0 ? void 0 : asset.quantity, value: asset === null || asset === void 0 ? void 0 : asset.value };
         });
     }
+    getAllAssets() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const assets = yield AssetModel_1.default.findAll({ raw: true, attributes: ['ticker', 'value', 'quantity'] });
+            return assets;
+        });
+    }
 }
 exports.default = AssetService;

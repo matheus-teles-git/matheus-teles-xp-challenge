@@ -29,6 +29,10 @@ class AssetController {
             }
             return response.status(200).json(assetInfo);
         });
+        this.getAllAssets = (_request, response) => __awaiter(this, void 0, void 0, function* () {
+            const assets = yield this.assetService.getAllAssets();
+            return response.status(200).json(assets);
+        });
     }
 }
 exports.default = AssetController;
