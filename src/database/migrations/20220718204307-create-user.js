@@ -9,6 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: 'id'
       },
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      password: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       balance: {
         allowNull: false,
         type: Sequelize.DECIMAL(10, 2)

@@ -14,6 +14,14 @@ Users.init({
         primaryKey: true,
         autoIncrement: true,
     },
+    email: {
+        type: sequelize_1.STRING,
+        allowNull: false,
+    },
+    password: {
+        type: sequelize_1.STRING,
+        allowNull: false,
+    },
     balance: {
         type: (0, sequelize_1.DECIMAL)(10, 2),
         allowNull: false,

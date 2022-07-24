@@ -7,8 +7,6 @@ const asset = new AssetController();
 
 const router = Router();
 
-router.get('/:id', verifyToken, asset.getByClient);
-
-router.get('/assetinfo/:id', verifyToken, asset.getByAsset);
+router.get('/', verifyToken, asset.getAllAssets);
 
 export default router;

@@ -1,5 +1,5 @@
 interface IUserRequest {
-  clientCode: number;
+  userId: number;
   balance: number;
 }
 
