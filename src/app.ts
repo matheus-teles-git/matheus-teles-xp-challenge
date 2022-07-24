@@ -1,5 +1,5 @@
 import express from 'express';
-import { user, asset, investment } from './routes';
+import { user, asset, investment, authentication } from './routes';
 
 
 const app = express();
@@ -11,6 +11,8 @@ app.use('/conta', user)
 app.use('/ativos', asset)
 
 app.use('/investimentos', investment)
+
+app.use('/', authentication)
 
 
 export default app;
