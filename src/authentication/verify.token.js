@@ -12,15 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UserModel_1 = __importDefault(require("../database/models/UserModel"));
-class AuthenticationService {
-    authenticate(payload) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const verifyUser = yield UserModel_1.default.findOne({ raw: true, where: { email: payload.email, password: payload.password } });
-            if (verifyUser === null)
-                return null;
-            return verifyUser;
-        });
-    }
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config = {
+    expiresIn: '3d',
+    algorithm: 'HS256',
+};
+const secret = process.env.JWT_SECRET || 'xpincbackend';
+function verifyToken(request, response, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { authorization } = request.headers;
+        if (!authorization) {
+            return response.status(401).json({ message: 'Token not found' });
+        }
+        try {
+            jsonwebtoken_1.default.verify(authorization, secret, config);
+            next();
+        }
+        catch (error) {
+            return response.status(401).json({ message: 'Expired or invalid token' });
+        }
+    });
 }
-exports.default = AuthenticationService;
+exports.default = verifyToken;

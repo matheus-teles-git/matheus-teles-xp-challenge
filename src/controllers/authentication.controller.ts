@@ -11,7 +11,7 @@ class AuthenticationController {
     if (login === null) {
       return response.status(403).json({ message: 'Incorrect Email or Password' });
     }
-    const token = generateToken(payload);
+    const token = generateToken(login);
     return response.status(200).json({ token });
   }
 

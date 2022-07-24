@@ -3,9 +3,9 @@ import IAuthenticationRequest from "../interfaces/authenticationRequest.interfac
 
 class AuthenticationService {
   public async authenticate (payload: IAuthenticationRequest) {
-    const verifyUser = await Users.findOne({ where: { email: payload.email, password: payload.password } });
+    const verifyUser = await Users.findOne({ raw: true, where: { email: payload.email, password: payload.password } });
     if (verifyUser === null) return null;
-    return true;
+    return verifyUser;
   }
 
 }

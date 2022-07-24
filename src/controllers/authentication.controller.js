@@ -12,15 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UserModel_1 = __importDefault(require("../database/models/UserModel"));
-class AuthenticationService {
-    authenticate(payload) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const verifyUser = yield UserModel_1.default.findOne({ raw: true, where: { email: payload.email, password: payload.password } });
-            if (verifyUser === null)
-                return null;
-            return verifyUser;
+const generate_token_1 = __importDefault(require("../authentication/generate.token"));
+const authentication_service_1 = __importDefault(require("../services/authentication.service"));
+class AuthenticationController {
+    constructor(authenticationService = new authentication_service_1.default()) {
+        this.authenticationService = authenticationService;
+        this.login = (request, response) => __awaiter(this, void 0, void 0, function* () {
+            const payload = request.body;
+            const login = yield this.authenticationService.authenticate(payload);
+            if (login === null) {
+                return response.status(403).json({ message: 'Incorrect Email or Password' });
+            }
+            const token = (0, generate_token_1.default)(login);
+            return response.status(200).json({ token });
         });
     }
 }
-exports.default = AuthenticationService;
+exports.default = AuthenticationController;
