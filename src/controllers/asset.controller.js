@@ -24,6 +24,9 @@ class AssetController {
         this.getByAsset = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             const assetInfo = yield this.assetService.getByAsset(Number(id));
+            if (assetInfo === null) {
+                return response.status(404).json({ message: 'Asset not found' });
+            }
             return response.status(200).json(assetInfo);
         });
     }

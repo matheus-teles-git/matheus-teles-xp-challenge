@@ -1,4 +1,4 @@
-import { Model, INTEGER, DATE, ForeignKey } from "sequelize";
+import { Model, INTEGER, DATE, ForeignKey, DECIMAL } from "sequelize";
 import database from '.'
 import Assets from "./AssetModel";
 import Users from "./UserModel";
@@ -7,7 +7,7 @@ class Accounts extends Model {
   userId!: ForeignKey<number>
   assetId!:  ForeignKey<number>;
   assetQuantity!: number;
-  assetValue!: ForeignKey<number>;
+  assetValue!: number;
   createdAt!: Date;
   updatedAt!: Date;
 }
@@ -15,6 +15,10 @@ class Accounts extends Model {
 Accounts.init({
   assetQuantity: {
     type: INTEGER,
+    allowNull: false,
+  },
+  assetValue: {
+    type: DECIMAL(10, 2),
     allowNull: false,
   },
   createdAt: {
