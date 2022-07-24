@@ -115,12 +115,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] endpoint GET /conta/:codCliente
     
 - [ ] Requisições extras
-    - [ ] endpoint POST /login 
-     <br/>
-           realiza login e retorna um token de autorização
-    - [ ] endpoint GET /allassets
-     <br/>
-           retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
+    - [ ] endpoint POST /login - realiza login e retorna um token de autorização
+    - [ ] endpoint GET /allassets - retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
