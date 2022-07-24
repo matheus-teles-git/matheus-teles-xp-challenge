@@ -115,8 +115,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] endpoint GET /conta/:codCliente
     
 - [ ] Requisições extras
-    - [ ] endpoint POST /login realiza login e retorna um token de autorização
-    - [ ] endpoint GET /allassets retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
+    - [ ] endpoint POST /login
+           realiza login e retorna um token de autorização
+    - [ ] endpoint GET /allassets
+           retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -125,7 +127,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- CONTACT -->
 ## Contato
 
-Matheus Teles - https://www.linkedin.com/in/matheus-teles-/
+Matheus Teles - https://www.linkedin.com/in/matheus-teles-/ 
+<br/>
 Project Link: [https://github.com/matheus-teles-git/matheus-teles-xp-challenge](https://github.com/matheus-teles-git/matheus-teles-xp-challenge)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
