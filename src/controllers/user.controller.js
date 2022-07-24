@@ -30,7 +30,7 @@ class UserController {
             if (deposit === null) {
                 return response.status(404).json({ message: 'Client not found' });
             }
-            return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
+            return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.userId} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
         });
         this.withdraw = (request, response) => __awaiter(this, void 0, void 0, function* () {
             const payload = request.body;
@@ -41,7 +41,7 @@ class UserController {
             if (deposit === false) {
                 return response.status(422).json({ message: 'Not enough balance to complete that operation' });
             }
-            return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.clientCode} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
+            return response.status(200).json({ message: `Account balance of client #${deposit === null || deposit === void 0 ? void 0 : deposit.userId} is R$${deposit === null || deposit === void 0 ? void 0 : deposit.balance}` });
         });
     }
 }

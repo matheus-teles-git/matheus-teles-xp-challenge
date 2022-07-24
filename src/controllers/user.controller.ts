@@ -19,7 +19,7 @@ class UserController {
     if (deposit === null) {
       return response.status(404).json({ message: 'Client not found' });
     }
-    return response.status(200).json({ message: `Account balance of client #${deposit?.clientCode} is R$${deposit?.balance}` });
+    return response.status(200).json({ message: `Account balance of client #${deposit?.userId} is R$${deposit?.balance}` });
   }
 
   public withdraw = async (request: Request, response: Response) => {
@@ -31,7 +31,7 @@ class UserController {
     if (deposit === false) {
       return response.status(422).json({ message: 'Not enough balance to complete that operation' });
     }
-    return response.status(200).json({ message: `Account balance of client #${deposit?.clientCode} is R$${deposit?.balance}` });
+    return response.status(200).json({ message: `Account balance of client #${deposit?.userId} is R$${deposit?.balance}` });
   }
 
 }

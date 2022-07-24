@@ -20,74 +20,63 @@ const UserModel_1 = __importDefault(require("../database/models/UserModel"));
 class InvestmentService {
     buyAsset(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const retrieveAccountBalance = yield UserModel_1.default.findOne({ where: { id: Number(payload.codCliente) } });
-            const retrieveAsset = yield AssetModel_1.default.findOne({ where: { id: payload.codAtivo } });
+            const retrieveAccountBalance = yield UserModel_1.default.findOne({ where: { id: Number(payload.userId) } });
+            const retrieveAsset = yield AssetModel_1.default.findOne({ where: { id: payload.assetId } });
             const retrieved = retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.quantity;
-            if (retrieved != undefined && payload.qtdeAtivo > retrieved)
+            if (retrieved != undefined && payload.assetQuantity > retrieved)
                 return false;
-            const operation = (0, mathjs_1.evaluate)(`${payload.qtdeAtivo} * ${retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.value}`);
+            const operation = (0, mathjs_1.evaluate)(`${payload.assetQuantity} * ${retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.value}`);
             if ((retrieveAccountBalance === null || retrieveAccountBalance === void 0 ? void 0 : retrieveAccountBalance.balance) != undefined && operation > (retrieveAccountBalance === null || retrieveAccountBalance === void 0 ? void 0 : retrieveAccountBalance.balance))
                 return null;
             const newAccountBalance = (0, mathjs_1.evaluate)(`${retrieveAccountBalance === null || retrieveAccountBalance === void 0 ? void 0 : retrieveAccountBalance.balance} - ${operation}`);
-            yield UserModel_1.default.update({ balance: newAccountBalance }, { where: { id: payload.codCliente } });
+            yield UserModel_1.default.update({ balance: newAccountBalance }, { where: { id: payload.userId } });
             const checkCustody = yield AccountModel_1.default.findOne({
                 attributes: ['assetQuantity', 'userId', 'assetId',],
-                where: { userId: payload.codCliente, assetId: payload.codAtivo }
+                where: { userId: payload.userId, assetId: payload.assetId }
             });
             if (checkCustody === null) {
-                const newCustody = yield AccountModel_1.default.create({ userId: payload.codCliente,
-                    assetId: payload.codAtivo,
-                    assetQuantity: payload.qtdeAtivo,
+                const newCustody = yield AccountModel_1.default.create({ userId: payload.userId,
+                    assetId: payload.assetId,
+                    assetQuantity: payload.assetQuantity,
                     assetValue: retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.value
                 });
                 return newCustody;
             }
-            yield AccountModel_1.default.update({ assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} + ${payload.qtdeAtivo}`) }, { where: {
-                    userId: payload.codCliente,
-                    assetId: payload.codAtivo
+            yield AccountModel_1.default.update({ assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} + ${payload.assetQuantity}`) }, { where: {
+                    userId: payload.userId,
+                    assetId: payload.assetId
                 }
             });
-            yield AssetModel_1.default.update({ quantity: (0, mathjs_1.evaluate)(`${retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.quantity} - ${payload.qtdeAtivo}`) }, { where: { id: payload.codAtivo } });
-            return { userId: payload.codCliente,
-                assetId: payload.codAtivo,
-                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} + ${payload.qtdeAtivo}`),
+            yield AssetModel_1.default.update({ quantity: (0, mathjs_1.evaluate)(`${retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.quantity} - ${payload.assetQuantity}`) }, { where: { id: payload.assetId } });
+            return { userId: payload.userId,
+                assetId: payload.assetId,
+                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} + ${payload.assetQuantity}`),
                 assetvalue: retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.value };
         });
     }
     sellAsset(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const retrieveAccountBalance = yield UserModel_1.default.findOne({ where: { id: payload.codCliente } });
-            const retrieveAssetBalance = yield AssetModel_1.default.findOne({ where: { id: Number(payload.codAtivo) } });
-            const retrieveAsset = yield AccountModel_1.default.findOne({ attributes: ['assetQuantity', 'userId', 'assetId'], where: { userId: Number(payload.codCliente), assetId: Number(payload.codAtivo) } });
-            // const retrieved = retrieveAsset?.assetQuantity;
-            // if (retrieved != undefined && payload.qtdeAtivo > retrieved) return false;
-            const operation = (0, mathjs_1.evaluate)(`${payload.qtdeAtivo} * ${retrieveAssetBalance === null || retrieveAssetBalance === void 0 ? void 0 : retrieveAssetBalance.value}`);
-            if ((retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetQuantity) != undefined && payload.qtdeAtivo > (retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetQuantity))
+            const retrieveAccountBalance = yield UserModel_1.default.findOne({ where: { id: payload.userId } });
+            const retrieveAssetBalance = yield AssetModel_1.default.findOne({ where: { id: Number(payload.assetId) } });
+            const retrieveAsset = yield AccountModel_1.default.findOne({ attributes: ['assetQuantity', 'userId', 'assetId'], where: { userId: Number(payload.userId), assetId: Number(payload.assetId) } });
+            const operation = (0, mathjs_1.evaluate)(`${payload.assetQuantity} * ${retrieveAssetBalance === null || retrieveAssetBalance === void 0 ? void 0 : retrieveAssetBalance.value}`);
+            if ((retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetQuantity) != undefined && payload.assetQuantity > (retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetQuantity))
                 return null;
             const newAccountBalance = (0, mathjs_1.evaluate)(`${retrieveAccountBalance === null || retrieveAccountBalance === void 0 ? void 0 : retrieveAccountBalance.balance} + ${operation}`);
-            yield UserModel_1.default.update({ balance: newAccountBalance }, { where: { id: payload.codCliente } });
+            yield UserModel_1.default.update({ balance: newAccountBalance }, { where: { id: payload.userId } });
             const checkCustody = yield AccountModel_1.default.findOne({
                 attributes: ['assetQuantity', 'userId', 'assetId'],
-                where: { userId: payload.codCliente, assetId: payload.codAtivo }
+                where: { userId: payload.userId, assetId: payload.assetId }
             });
-            // if (checkCustody === null) {
-            //   const newCustody = await Accounts.create(
-            //     { userId: payload.codCliente,
-            //       assetId: payload.codAtivo,
-            //       assetQuantity: payload.qtdeAtivo,
-            //       assetValue: retrieveAssetBalance?.value
-            //     });
-            //   return newCustody;
-            // }
-            yield AccountModel_1.default.update({ assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} - ${payload.qtdeAtivo}`) }, { where: {
-                    userId: payload.codCliente,
-                    assetId: payload.codAtivo
+            yield AccountModel_1.default.update({ assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} - ${payload.assetQuantity}`) }, { where: {
+                    userId: payload.userId,
+                    assetId: payload.assetId
                 }
             });
-            yield AssetModel_1.default.update({ quantity: (0, mathjs_1.evaluate)(`${retrieveAssetBalance === null || retrieveAssetBalance === void 0 ? void 0 : retrieveAssetBalance.quantity} + ${payload.qtdeAtivo}`) }, { where: { id: payload.codAtivo } });
-            return { userId: payload.codCliente,
-                assetId: payload.codAtivo,
-                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} - ${payload.qtdeAtivo}`),
+            yield AssetModel_1.default.update({ quantity: (0, mathjs_1.evaluate)(`${retrieveAssetBalance === null || retrieveAssetBalance === void 0 ? void 0 : retrieveAssetBalance.quantity} + ${payload.assetQuantity}`) }, { where: { id: payload.assetId } });
+            return { userId: payload.userId,
+                assetId: payload.assetId,
+                assetQuantity: (0, mathjs_1.evaluate)(`${checkCustody === null || checkCustody === void 0 ? void 0 : checkCustody.assetQuantity} - ${payload.assetQuantity}`),
                 assetvalue: retrieveAsset === null || retrieveAsset === void 0 ? void 0 : retrieveAsset.assetValue };
         });
     }
