@@ -1,7 +1,7 @@
 interface IInvestmentRequest {
-  codCliente: number;
-  codAtivo: number;
-  qtdeAtivo: number;
+  userId: number;
+  assetId: number;
+  assetQuantity: number;
 }
 
 export default IInvestmentRequest;

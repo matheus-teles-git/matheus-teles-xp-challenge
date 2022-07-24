@@ -7,81 +7,70 @@ import IInvestmentRequest from "../interfaces/investmentRequest.interface";
 //both methods are too verbose, need refactoring
 class InvestmentService { 
   public async buyAsset(payload: IInvestmentRequest) {
-    const retrieveAccountBalance = await Users.findOne({ where: { id: Number(payload.codCliente) }})
-    const retrieveAsset = await Assets.findOne({ where: { id: payload.codAtivo }});
+    const retrieveAccountBalance = await Users.findOne({ where: { id: Number(payload.userId) }})
+    const retrieveAsset = await Assets.findOne({ where: { id: payload.assetId }});
     const retrieved = retrieveAsset?.quantity;
-    if (retrieved != undefined && payload.qtdeAtivo > retrieved) return false;
-    const operation = evaluate(`${payload.qtdeAtivo} * ${retrieveAsset?.value}`)
+    if (retrieved != undefined && payload.assetQuantity > retrieved) return false;
+    const operation = evaluate(`${payload.assetQuantity} * ${retrieveAsset?.value}`)
     if (retrieveAccountBalance?.balance != undefined && operation > retrieveAccountBalance?.balance) return null;
     const newAccountBalance = evaluate(`${retrieveAccountBalance?.balance} - ${operation}`);
-    await Users.update({ balance: newAccountBalance}, { where: { id: payload.codCliente } });
+    await Users.update({ balance: newAccountBalance}, { where: { id: payload.userId } });
     const checkCustody = await Accounts.findOne({
         attributes: ['assetQuantity', 'userId', 'assetId', ],
-        where: { userId: payload.codCliente, assetId: payload.codAtivo }
+        where: { userId: payload.userId, assetId: payload.assetId }
       });
     if (checkCustody === null) {
       const newCustody = await Accounts.create(
-        { userId: payload.codCliente,
-          assetId: payload.codAtivo,
-          assetQuantity: payload.qtdeAtivo,
+        { userId: payload.userId,
+          assetId: payload.assetId,
+          assetQuantity: payload.assetQuantity,
           assetValue: retrieveAsset?.value
         });
       return newCustody;
     }
     await Accounts.update(
-      { assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.qtdeAtivo}`) },
+      { assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.assetQuantity}`) },
       { where: {
-        userId: payload.codCliente,
-        assetId: payload.codAtivo
+        userId: payload.userId,
+        assetId: payload.assetId
         }
       });
     await Assets.update( 
-      { quantity: evaluate(`${retrieveAsset?.quantity} - ${payload.qtdeAtivo}`)},
-      { where: { id: payload.codAtivo }}
+      { quantity: evaluate(`${retrieveAsset?.quantity} - ${payload.assetQuantity}`)},
+      { where: { id: payload.assetId }}
       );
-    return { userId: payload.codCliente,
-      assetId: payload.codAtivo, 
-      assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.qtdeAtivo}`), 
+    return { userId: payload.userId,
+      assetId: payload.assetId, 
+      assetQuantity: evaluate(`${checkCustody?.assetQuantity} + ${payload.assetQuantity}`), 
       assetvalue: retrieveAsset?.value };
   }
 
   public async sellAsset(payload: IInvestmentRequest) {
-    const retrieveAccountBalance = await Users.findOne({ where: { id: payload.codCliente }})
-    const retrieveAssetBalance = await Assets.findOne({ where: { id: Number(payload.codAtivo) }})
-    const retrieveAsset = await Accounts.findOne({ attributes: ['assetQuantity', 'userId', 'assetId'], where: { userId: Number(payload.codCliente), assetId: Number(payload.codAtivo) }});
-    // const retrieved = retrieveAsset?.assetQuantity;
-    // if (retrieved != undefined && payload.qtdeAtivo > retrieved) return false;
-    const operation = evaluate(`${payload.qtdeAtivo} * ${retrieveAssetBalance?.value}`)
-    if (retrieveAsset?.assetQuantity != undefined && payload.qtdeAtivo > retrieveAsset?.assetQuantity) return null;
+    const retrieveAccountBalance = await Users.findOne({ where: { id: payload.userId }})
+    const retrieveAssetBalance = await Assets.findOne({ where: { id: Number(payload.assetId) }})
+    const retrieveAsset = await Accounts.findOne({ attributes: ['assetQuantity', 'userId', 'assetId'], where: { userId: Number(payload.userId), assetId: Number(payload.assetId) }});
+    const operation = evaluate(`${payload.assetQuantity} * ${retrieveAssetBalance?.value}`)
+    if (retrieveAsset?.assetQuantity != undefined && payload.assetQuantity > retrieveAsset?.assetQuantity) return null;
     const newAccountBalance = evaluate(`${retrieveAccountBalance?.balance} + ${operation}`);
-    await Users.update({ balance: newAccountBalance}, { where: { id: payload.codCliente } });
+    await Users.update({ balance: newAccountBalance}, { where: { id: payload.userId } });
     const checkCustody = await Accounts.findOne({
         attributes: ['assetQuantity', 'userId', 'assetId'],
-        where: { userId: payload.codCliente, assetId: payload.codAtivo }
+        where: { userId: payload.userId, assetId: payload.assetId }
       });
-    // if (checkCustody === null) {
-    //   const newCustody = await Accounts.create(
-    //     { userId: payload.codCliente,
-    //       assetId: payload.codAtivo,
-    //       assetQuantity: payload.qtdeAtivo,
-    //       assetValue: retrieveAssetBalance?.value
-    //     });
-    //   return newCustody;
-    // }
     await Accounts.update(
-      { assetQuantity: evaluate(`${checkCustody?.assetQuantity} - ${payload.qtdeAtivo}`) },
+      { assetQuantity: evaluate(`${checkCustody?.assetQuantity} - ${payload.assetQuantity}`) },
       { where: {
-        userId: payload.codCliente,
-        assetId: payload.codAtivo
+        userId: payload.userId,
+        assetId: payload.assetId
         }
       });
     await Assets.update( 
-      { quantity: evaluate(`${retrieveAssetBalance?.quantity} + ${payload.qtdeAtivo}`)},
-      { where: { id: payload.codAtivo }}
+      { quantity: evaluate(`${retrieveAssetBalance?.quantity} + ${payload.assetQuantity}`)},
+      { where: { id: payload.assetId }}
       );
-    return { userId: payload.codCliente,
-      assetId: payload.codAtivo, 
-      assetQuantity: evaluate(`${checkCustody?.assetQuantity} - ${payload.qtdeAtivo}`), 
+    return { userId: payload.userId,
+      assetId: payload.assetId, 
+      assetQuantity: evaluate(`${checkCustody?.assetQuantity} - ${payload.assetQuantity}`), 
       assetvalue: retrieveAsset?.assetValue };
   }
 

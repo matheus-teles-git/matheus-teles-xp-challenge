@@ -17,7 +17,7 @@ class AssetService {
   public async getByAsset(id: number) {
     const asset = await Assets.findOne({ where: { id } });
     if (asset === null) return null;
-    return { id: asset?.id, codAtivo: asset?.ticker, quantidade: asset?.quantity, valor: asset?.value };
+    return { id: asset?.id, ticker: asset?.ticker, quantity: asset?.quantity, value: asset?.value };
   }
 
 }
