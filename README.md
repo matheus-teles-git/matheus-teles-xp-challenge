@@ -93,6 +93,7 @@ Utilizei Sequelize como uma ORM para facilitar as requisições ao banco de dado
     - [ ] endpoint POST /investimentos/vender
     
 - [ ] Requisições para ativos
+    - [ ] endpoint GET /allassets - retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
     - [ ] endpoint GET BY CLIENT /ativos/:codCliente
     - [ ] endpoint GET BY ASSETS /ativos/assetinfo/:codAtivo
     
@@ -103,7 +104,10 @@ Utilizei Sequelize como uma ORM para facilitar as requisições ao banco de dado
     
 - [ ] Requisições extras
     - [ ] endpoint POST /login - realiza login e retorna um token de autorização
-    - [ ] endpoint GET /allassets - retorna todos os ativos disponíveis para compra, seu preço e quantidade disponível
+    
+ - Extras:
+ Para operações de compra ou venda, o saldo na conta do cliente é atualizado automaticamente.
+ Autenticação JWT funcionando através do enpoint POST /login, outros endpoints pedem o token de requisição para autorizar o acesso.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
